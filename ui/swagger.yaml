@@ -9,8 +9,8 @@ info:
   # license:
   #   name: "Apache 2.0"
   #   url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
-# host: "elevate.swagger.io"
+# host: ".swagger.io"
+host: "gdl-service-layer-uak3zqgy4q-uc.a.run.app"
 basePath: "/v2"
 schemes:
   - "https"
@@ -52,10 +52,10 @@ paths:
           description: "{ \ndata: { \nconnectedAccountId, \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus, \ncreatedAt, \nupdatedAt \n}, \nsuccess: true, \nerror: null \n}"
         "500":
           description: "{ \ndata: { \nconnectedAccountId: null, \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus: \"ERROR\" \n}, \nsucces: false, \nerror: error \n}"
-      security:
-        - petstore_auth:
-            - "write:connected-accounts"
-            - "read:connected-accounts"
+      # security:
+      #   - petstore_auth:
+      #       - "write:connected-accounts"
+      #       - "read:connected-accounts"
 
   #GET ConnectedAccountActivity by ID
   /api/connected-account/current-account-activity/{teamAccountId}:
@@ -76,11 +76,11 @@ paths:
           # format: "int64"
       responses:
         "200":
-          description: "{ \ndata: { \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus, \nproductDesc, \nproductCode, \nnetSales, \nlistPrice, \nprogramPrice, \nqtySold, \norderCompleteDate \n}, \nsuccess: true, \nerror: null \n}"
+          description: "{ \ndata: [ \n{ \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus, \nproductDesc, \nproductCode, \nnetSales, \nlistPrice, \nprogramPrice, \nqtySold, \norderCompleteDate \n}, \n...{} \n], \nsuccess: true, \nerror: null \n}"
         "500":
           description: "{ \ndata: null, \nsucces: false, \nerror: error \n}"
-      security:
-        - api_key: []
+      # security:
+      #   - api_key: []
 
   #DELETE ConnectedAccount by ID
   /api/connected-account/remove-connected-account/{connectedAccountId}:
@@ -104,18 +104,18 @@ paths:
           description: "{ \ndata: { \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus, \ncreatedAt, \nupdatedAt \n}, \nsuccess: true, \nerror: null \n}"
         "500":
           description: "{ \ndata: null, \nsucces: false, \nerror: error \n}"
-      security:
-        - api_key: []
+      # security:
+      #   - api_key: []
 
 #------ SECURITY ------
 securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:connected-accounts: "modify connected-accounts in your account"
-      read:connected-accounts: "read your connected-accounts"
+  # petstore_auth:
+  #   type: "oauth2"
+  # authorizationUrl: "http://.swagger.io/oauth/dialog"
+  # flow: "implicit"
+  # scopes:
+  #   write:connected-accounts: "modify connected-accounts in your account"
+  #   read:connected-accounts: "read your connected-accounts"
   api_key:
     type: "apiKey"
     name: "api_key"
