@@ -38,7 +38,7 @@ paths:
           type: "string"
         - name: "vendorName"
           in: "formData"
-          description: '(eg; "OD")'
+          description: '(eg; "OD" or "EA Express" or "Dell")'
           required: true
           type: "string"
         - name: "vendorAccountId"
@@ -62,7 +62,7 @@ paths:
     get:
       tags:
         - "fetch ConnectedAccountActivity by teamAccountID"
-      summary: 'given a "teamAccountId" string, API fetches ConnectedAccountActivity entries from BigQuery (dataset: "connected_account" | table: "connected_account_activity")'
+      summary: 'given a "teamAccountId" string, API fetches all entries from Snowflake (database: "elevate_accounts" | table: "elevate_accounts_activity")'
       operationId: "getConnectedAccountActivity"
       produces:
         # - "application/xml"
@@ -76,14 +76,14 @@ paths:
           # format: "int64"
       responses:
         "200":
-          description: "{ \ndata: [ \n{ \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus, \nproductDesc, \nproductCode, \nnetSales, \nlistPrice, \nprogramPrice, \nqtySold, \norderCompleteDate \n}, \n...{} \n], \nsuccess: true, \nerror: null \n}"
+          description: "{ \ndata: [ \n{ \nconnectedAccountId, \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus, \ncreatedAt, \nupdatedAt, \ndecisionMakerId, \ndecisionMakerName, \ngrandparentId, \ngrandparentName, \nparentId, \nparentName, \naccountId, \ncustomerName, \nshipToId, \naddressKey, \nshipToName, \naddress1, \naddress2, \ncity, \nstate, \nzipCode, \ncustomerCreateDate, \nfirstOrderDate, \ncustomerDepartment, \ncustomerPurchaseOrder, \ncustomerDesktop, \ncustomerReleaseField, \ncontractIndicator, \ncontactName, \nphone, \nwebUserId, \nwebUserEmail, \nodProductCode, \nproductDescription, \nuom, \nwholesalerProductCode, \npackQty, \nqtySold, \ncorePlanId, \netSales, \ncontractNetSales, \nprogramPrice, \nretailListPrice, \nparentOrderId, \norderSuborderId, \norderSourceName, \norderSourceCode, \nproductCategoryname, \nitemDepartmentId, \nitemDepartmentName, \nitemClassId, \nitemClassName, \nitemSubclassId, \nitemSubclassName, \nrecycledFlag, \nprimarySupplierId, \nprimarySuppliername, \norderSupplierMinorityBusinessCode, \norderSupplierMinorityBusinessDesc, \norderSupplierMinorityCategoryCode, \norderSupplierMinorityCategoryDesc, \norderCreateDate, \norderCompleteDate, \ninventoryLocation, \nspecialProductId, \nproductId, \nspecialType, \nspecialMod, \nspecialLimit, \ntotalIssued, \ntotalClaimed, \ntotalAvailable, \ndateActivated, \ndateDeactivated, \nspecialRestrictions \n}, \n...{} \n], \nsuccess: true, \nerror: null \n}"
         "500":
           description: "{ \ndata: null, \nsucces: false, \nerror: error \n}"
       # security:
       #   - api_key: []
 
   #DELETE ConnectedAccount by ID
-  /api/connected-account/remove-connected-account/{connectedAccountId}:
+  /api/connected-account/remove/{connectedAccountId}:
     delete:
       tags:
         - "delete ConnectedAccount by connectedAccountId"
@@ -158,25 +158,173 @@ definitions:
         type: "string"
       status:
         type: "string"
-      productDesc:
+      createdAt:
+        type: "date"
+      updatedAt:
+        type: "date"
+      decisionMakerId:
         type: "string"
-      productCode:
+      decisionMakerName:
         type: "string"
+      grandparentId:
+        type: "number"
+        format: "int64"
+      grandparentName:
+        type: "string"
+      parentId:
+        type: "number"
+        format: "int64"
+      parentName:
+        type: "string"
+      accountId:
+        type: "number"
+        format: "int64"
+      customerName:
+        type: "string"
+      shipToId:
+        type: "number"
+        format: "int64"
+      addressKey:
+        type: "string"
+      shipToName:
+        type: "string"
+      address1:
+        type: "string"
+      address2:
+        type: "string"
+      city:
+        type: "string"
+      state:
+        type: "string"
+      zipCode:
+        type: "string"
+      customerCreateDate:
+        type: "date"
+      firstOrderDate:
+        type: "date"
+      customerDepartment:
+        type: "string"
+      customerPurchaseOrder:
+        type: "string"
+      customerDesktop:
+        type: "string"
+      customerReleaseField:
+        type: "string"
+      contractIndicator:
+        type: "string"
+      contactName:
+        type: "string"
+      phone:
+        type: "string"
+      webUserId:
+        type: "string"
+      webUserEmail:
+        type: "string"
+      odProductCode:
+        type: "string"
+      productDescription:
+        type: "string"
+      uom:
+        type: "string"
+      wholesalerProductCode:
+        type: "string"
+      packQty:
+        type: "number"
+        format: "int64"
+      qtySold:
+        type: "number"
+        format: "int64"
+      corePlandId:
+        type: "number"
+        format: "int64"
       netSales:
+        type: "number"
+        format: "float64"
+      contractNetSales:
         type: "number"
         format: "float64"
       listPrice:
         type: "number"
         format: "float64"
-      programPrice:
+      programListPrice:
         type: "number"
         format: "float64"
-      qtySold:
+      parentOrderId:
+        type: "string"
+      orderSuborderId:
+        type: "string"
+      orderSourceName:
+        type: "string"
+      orderSourceCode:
+        type: "string"
+      productCategoryName:
+        type: "string"
+      itemDepartmentId:
         type: "number"
-        format: "int64"
+        format: "float64"
+      itemDepartmentName:
+        type: "string"
+      itemClassId:
+        type: "number"
+        format: "float64"
+      itemClassName:
+        type: "string"
+      itemSubclassId:
+        type: "number"
+        format: "float64"
+      itemSubclassName:
+        type: "string"
+      recycledFlag:
+        type: "string"
+      primarySupplierId:
+        type: "string"
+      primarySupplierName:
+        type: "string"
+      orderSupplierMinorityBusinessCode:
+        type: "string"
+      orderSupplierMinorityBusinessDesc:
+        type: "string"
+      orderSupplierMinorityCategoryCode:
+        type: "string"
+      orderSupplierMinorityCategoryDesc:
+        type: "string"
+      orderCreateDate:
+        type: "string"
+        format: "date"
       orderCompleteDate:
         type: "string"
-        format: "date-time"
+        format: "date"
+      inventoryLocation:
+        type: "string"
+      specialProductId:
+        type: "string"
+      productId:
+        type: "string"
+      specialType:
+        type: "string"
+      specialMod:
+        type: "number"
+        format: "float64"
+      specialLimit:
+        type: "number"
+        format: "int64"
+      totalIssued:
+        type: "number"
+        format: "int64"
+      totalClaimed:
+        type: "number"
+        format: "int64"
+      totalAvailable:
+        type: "number"
+        format: "int64"
+      dateActivated:
+        type: "string"
+        format: "date"
+      dateDeactivated:
+        type: "string"
+        format: "date"
+      specialRestictions:
+        type: "string"
     xml:
       name: "ConnectedAccountActivity"
   ApiResponse:
