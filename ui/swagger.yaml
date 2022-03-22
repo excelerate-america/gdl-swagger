@@ -159,9 +159,11 @@ definitions:
       status:
         type: "string"
       createdAt:
-        type: "date"
+        type: "string"
+        format: "date"
       updatedAt:
-        type: "date"
+        type: "string"
+        format: "date"
       decisionMakerId:
         type: "string"
       decisionMakerName:
@@ -199,9 +201,11 @@ definitions:
       zipCode:
         type: "string"
       customerCreateDate:
-        type: "date"
+        type: "string"
+        format: "date"
       firstOrderDate:
-        type: "date"
+        type: "string"
+        format: "date"
       customerDepartment:
         type: "string"
       customerPurchaseOrder:
