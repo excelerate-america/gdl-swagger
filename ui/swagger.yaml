@@ -76,7 +76,7 @@ paths:
           # format: "int64"
       responses:
         "200":
-          description: "{ \ndata: [ \n{ \nconnectedAccountId, \nvendorName, \nvendorAccountId, \nteamAccountId, \nstatus, \ncreatedAt, \nupdatedAt, \ndecisionMakerId, \ndecisionMakerName, \ngrandparentId, \ngrandparentName, \nparentId, \nparentName, \naccountId, \ncustomerName, \nshipToId, \naddressKey, \nshipToName, \naddress1, \naddress2, \ncity, \nstate, \nzipCode, \ncustomerCreateDate, \nfirstOrderDate, \ncustomerDepartment, \ncustomerPurchaseOrder, \ncustomerDesktop, \ncustomerReleaseField, \ncontractIndicator, \ncontactName, \nphone, \nwebUserId, \nwebUserEmail, \nodProductCode, \nproductDescription, \nuom, \nwholesalerProductCode, \npackQty, \nqtySold, \ncorePlanId, \netSales, \ncontractNetSales, \nprogramPrice, \nretailListPrice, \nparentOrderId, \norderSuborderId, \norderSourceName, \norderSourceCode, \nproductCategoryname, \nitemDepartmentId, \nitemDepartmentName, \nitemClassId, \nitemClassName, \nitemSubclassId, \nitemSubclassName, \nrecycledFlag, \nprimarySupplierId, \nprimarySuppliername, \norderSupplierMinorityBusinessCode, \norderSupplierMinorityBusinessDesc, \norderSupplierMinorityCategoryCode, \norderSupplierMinorityCategoryDesc, \norderCreateDate, \norderCompleteDate, \ninventoryLocation, \nspecialProductId, \nproductId, \nspecialType, \nspecialMod, \nspecialLimit, \ntotalIssued, \ntotalClaimed, \ntotalAvailable, \ndateActivated, \ndateDeactivated, \nspecialRestrictions \n}, \n...{} \n], \nsuccess: true, \nerror: null \n}"
+          description: "{ \ndata: [ \n{ \nconnectedAccountId, \nvendorName, \nvendorAccountId, \nteamAccountId, \naccountId, \nphone, \nwebUserId, \nwebUserEmail, \nodProductCode, \nproductDescription, \nuom, \npackQty, \nqtySold, \netSales, \ncontractNetSales, \nprogramPrice, \nretailListPrice, \nparentOrderId, \nproductCategoryname, \norderCreateDate, \norderCompleteDate, \nproductId, \nspecialType, \nspecialMod, \nspecialLimit, \ntotalIssued, \ntotalClaimed, \ntotalAvailable, \ndateActivated, \ndateDeactivated, \nspecialRestrictions \n}, \n...{} \n], \nsuccess: true, \nerror: null \n}"
         "500":
           description: "{ \ndata: null, \nsucces: false, \nerror: error \n}"
       # security:
@@ -149,6 +149,8 @@ definitions:
   ConnectedAccountActivity:
     type: "object"
     properties:
+      connectedAccountId:
+        type: "string"
       vendorName:
         type: "string"
       vendorAccountId:
@@ -156,73 +158,10 @@ definitions:
         format: "int64"
       teamAccountId:
         type: "string"
-      status:
-        type: "string"
-      createdAt:
-        type: "string"
-        format: "date"
-      updatedAt:
-        type: "string"
-        format: "date"
-      decisionMakerId:
-        type: "string"
-      decisionMakerName:
-        type: "string"
-      grandparentId:
-        type: "number"
-        format: "int64"
-      grandparentName:
-        type: "string"
-      parentId:
-        type: "number"
-        format: "int64"
-      parentName:
-        type: "string"
       accountId:
         type: "number"
         format: "int64"
-      customerName:
-        type: "string"
-      shipToId:
-        type: "number"
-        format: "int64"
-      addressKey:
-        type: "string"
-      shipToName:
-        type: "string"
-      address1:
-        type: "string"
-      address2:
-        type: "string"
-      city:
-        type: "string"
-      state:
-        type: "string"
-      zipCode:
-        type: "string"
-      customerCreateDate:
-        type: "string"
-        format: "date"
-      firstOrderDate:
-        type: "string"
-        format: "date"
-      customerDepartment:
-        type: "string"
-      customerPurchaseOrder:
-        type: "string"
-      customerDesktop:
-        type: "string"
-      customerReleaseField:
-        type: "string"
-      contractIndicator:
-        type: "string"
-      contactName:
-        type: "string"
       phone:
-        type: "string"
-      webUserId:
-        type: "string"
-      webUserEmail:
         type: "string"
       odProductCode:
         type: "string"
@@ -230,15 +169,10 @@ definitions:
         type: "string"
       uom:
         type: "string"
-      wholesalerProductCode:
-        type: "string"
       packQty:
         type: "number"
         format: "int64"
       qtySold:
-        type: "number"
-        format: "int64"
-      corePlandId:
         type: "number"
         format: "int64"
       netSales:
@@ -255,42 +189,7 @@ definitions:
         format: "float64"
       parentOrderId:
         type: "string"
-      orderSuborderId:
-        type: "string"
-      orderSourceName:
-        type: "string"
-      orderSourceCode:
-        type: "string"
       productCategoryName:
-        type: "string"
-      itemDepartmentId:
-        type: "number"
-        format: "float64"
-      itemDepartmentName:
-        type: "string"
-      itemClassId:
-        type: "number"
-        format: "float64"
-      itemClassName:
-        type: "string"
-      itemSubclassId:
-        type: "number"
-        format: "float64"
-      itemSubclassName:
-        type: "string"
-      recycledFlag:
-        type: "string"
-      primarySupplierId:
-        type: "string"
-      primarySupplierName:
-        type: "string"
-      orderSupplierMinorityBusinessCode:
-        type: "string"
-      orderSupplierMinorityBusinessDesc:
-        type: "string"
-      orderSupplierMinorityCategoryCode:
-        type: "string"
-      orderSupplierMinorityCategoryDesc:
         type: "string"
       orderCreateDate:
         type: "string"
@@ -298,10 +197,6 @@ definitions:
       orderCompleteDate:
         type: "string"
         format: "date"
-      inventoryLocation:
-        type: "string"
-      specialProductId:
-        type: "string"
       productId:
         type: "string"
       specialType:
